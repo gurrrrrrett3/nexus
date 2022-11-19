@@ -1,5 +1,6 @@
 import fetch from "node-fetch"
 import { db, lookup } from ".."
+import Time from "../util/time"
 
 export default class CachedServerData {
 
@@ -53,7 +54,6 @@ export default class CachedServerData {
         url.searchParams.set("ip", this.ip)
         url.searchParams.set("port", this.port.toString())
 
-        console.log(url.href)
         const res = await fetch(url.href)
 
         if (res.status !== 200) {
@@ -111,7 +111,7 @@ export default class CachedServerData {
         return this
     }
 
-    public async monitor(): Promise<void> {
+    public async monitor(): Promise<this> {
         await this.fetch()
         const serverId = await this.getMyServerId()
 
@@ -127,11 +127,14 @@ export default class CachedServerData {
                 }
             })
 
+            console.log(`${this.ip} playercount recorded, next update in ${new Time(Date.now() - this.cachedAt.getTime()).toString()}`)
+
         } else {
             console.log(`Server ${this.ip} not found in database, deleting cache entry`)
             lookup.cache.remove(lookup.cache.getKey(this.ip, this.port))
         }
-       
+
+        return this
 
     }
 
