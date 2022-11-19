@@ -6,8 +6,10 @@ export default class Puppet {
     private page?: puppeteer.Page;
 
     public async init() {
+        console.log("Initializing puppeteer");
         this.browser = await puppeteer.launch({ headless: true });
         this.page = await this.browser.newPage();
+        console.log("Puppeteer initialized");
     }
 
     public async close() {

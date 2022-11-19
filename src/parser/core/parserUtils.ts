@@ -10,7 +10,7 @@ export default class ParserUtils {
     for (let i = 1; i <= pages; i++) {
       const newServers = await method.call(setThis, { page: i });
       servers.push(...newServers);
-      console.log(`Fetched ${newServers.length} servers from page ${i}`);
+     // console.log(`Fetched ${newServers.length} servers from page ${i}`);
     }
     return servers;
   }

@@ -29,8 +29,6 @@ export default class Fetcher_MinecraftServerList {
             baseUrl.searchParams.append("country", options.country);
         }
 
-        console.log(baseUrl.href);
-
         const data = await puppet.get(baseUrl.href)
 
         if (!data) {

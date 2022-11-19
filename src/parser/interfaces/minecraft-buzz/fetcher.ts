@@ -67,8 +67,6 @@ export default class Fetcher_MinecraftServerList {
             baseUrl.searchParams.append("type", options.buzz_server_type.toString());
         }
 
-        console.log(baseUrl.href);
-
         const data = await puppet.get(baseUrl.href)
 
         if (!data) {
@@ -99,7 +97,6 @@ export default class Fetcher_MinecraftServerList {
             const name = $(el).children("td").eq(1).children("span").children("h3").text()
             const description = $(el).children("td").eq(6).children("p").text()
             
-          console.log(vText);
             const server = new MinecraftServer({
                 ip,
                 name,
